@@ -1,0 +1,107 @@
+/* ============================================ */
+/* PRODUCTION FIXES - Cross-browser compatibility */
+/* ============================================ */
+
+/* CAROUSEL ARROW FIXES - Replace experimental CSS with standard positioning */
+.carousel {
+    position: relative !important;
+    scroll-padding: 30px 30px !important; /* Equal spacing: left right */
+}
+
+.carousel::scroll-button(right),
+.carousel::scroll-button(left) {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 10 !important;
+}
+
+.carousel::scroll-button(right) {
+    content: '→' !important;
+    right: -30px !important;
+    margin-right: 0 !important;
+}
+
+.carousel::scroll-button(left) {
+    content: '←' !important;
+    left: -30px !important;
+    margin-left: 0 !important;
+}
+
+/* Responsive arrow positioning */
+@media (max-width: 575.98px) {
+    .carousel::scroll-button(right),
+    .carousel::scroll-button(left) {
+        right: -20px !important;
+        left: -20px !important;
+    }
+    
+    .carousel {
+        scroll-padding: 20px 20px !important; /* Mobile: arrows at -20px */
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .carousel::scroll-button(right),
+    .carousel::scroll-button(left) {
+        right: -22px !important;
+        left: -22px !important;
+    }
+    
+    .carousel {
+        scroll-padding: 22px 22px !important; /* Small tablet: arrows at -22px */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .carousel::scroll-button(right),
+    .carousel::scroll-button(left) {
+        right: -25px !important;
+        left: -25px !important;
+    }
+    
+    .carousel {
+        scroll-padding: 25px 25px !important; /* Tablet: arrows at -25px */
+    }
+}
+
+/* HERO IMAGE FIX - Increase size on desktop */
+.hero-image img {
+    max-width: 600px !important;
+    max-height: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+}
+
+/* CAROUSEL IMAGE FIX - Prevent stretching */
+.img-card img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    border-radius: 0.3em !important;
+}
+
+/* FIRST IMAGE FIX - Add left margin for initial position */
+.img-card:first-child {
+    margin-left: 30px !important;
+}
+
+/* Responsive first image margins */
+@media (max-width: 575.98px) {
+    .img-card:first-child {
+        margin-left: 20px !important;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .img-card:first-child {
+        margin-left: 22px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .img-card:first-child {
+        margin-left: 25px !important;
+    }
+}
