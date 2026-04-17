@@ -1,0 +1,168 @@
+/* ============================================ */
+/* PRODUCTION FIXES - Cross-browser compatibility */
+/* ============================================ */
+
+/* CAROUSEL ARROW FIXES - Replace experimental CSS with standard positioning */
+.carousel {
+    position: relative !important;
+    scroll-padding: 30px 30px !important; /* Equal spacing: left right */
+}
+
+.carousel::scroll-button(right),
+.carousel::scroll-button(left) {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 10 !important;
+    
+    /* Remove padding that offsets the arrow */
+    padding-bottom: 0 !important;
+    padding: 0 !important;
+    
+    /* Add flexbox for perfect content centering */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    
+    /* Fix line-height issues */
+    line-height: 1 !important;
+    
+    /* Ensure consistent font rendering across browsers */
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    
+    /* Fix any inherited margins */
+    margin: 0 !important;
+    
+    /* DESKTOP (992px+): Explicit 60px × 60px dimensions */
+    width: 60px !important;
+    height: 60px !important;
+    min-width: 60px !important;
+    min-height: 60px !important;
+    max-width: 60px !important;
+    max-height: 60px !important;
+}
+
+/* Ensure arrows are perfectly centered and identical */
+.carousel::scroll-button(right) {
+    content: '→' !important;
+    right: -30px !important;
+    margin-right: 0 !important;
+}
+
+.carousel::scroll-button(left) {
+    content: '←' !important;
+    left: -30px !important;
+    margin-left: 0 !important;
+}
+
+/* Fix arrow content vertical alignment */
+.carousel::scroll-button(right)::after,
+.carousel::scroll-button(left)::after {
+    display: block !important;
+    line-height: 1 !important;
+    vertical-align: middle !important;
+}
+
+/* Responsive arrow positioning and sizing */
+
+/* MOBILE (up to 575px): 40px arrows */
+@media (max-width: 575.98px) {
+    .carousel::scroll-button(right),
+    .carousel::scroll-button(left) {
+        right: -20px !important;
+        left: -20px !important;
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+        max-width: 40px !important;
+        max-height: 40px !important;
+        font-size: 1.5rem !important;
+    }
+    
+    .carousel {
+        scroll-padding: 20px 20px !important;
+    }
+}
+
+/* SMALL TABLET (576-767px): 45px arrows */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .carousel::scroll-button(right),
+    .carousel::scroll-button(left) {
+        right: -22px !important;
+        left: -22px !important;
+        width: 45px !important;
+        height: 45px !important;
+        min-width: 45px !important;
+        min-height: 45px !important;
+        max-width: 45px !important;
+        max-height: 45px !important;
+        font-size: 1.8rem !important;
+    }
+    
+    .carousel {
+        scroll-padding: 22px 22px !important;
+    }
+}
+
+/* TABLET (768-991px): 50px arrows */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .carousel::scroll-button(right),
+    .carousel::scroll-button(left) {
+        right: -25px !important;
+        left: -25px !important;
+        width: 50px !important;
+        height: 50px !important;
+        min-width: 50px !important;
+        min-height: 50px !important;
+        max-width: 50px !important;
+        max-height: 50px !important;
+        font-size: 2rem !important;
+    }
+    
+    .carousel {
+        scroll-padding: 25px 25px !important;
+    }
+}
+
+/* HERO IMAGE FIX - Increase size on desktop */
+.hero-image img {
+    max-width: 600px !important;
+    max-height: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+}
+
+/* CAROUSEL IMAGE FIX - Prevent stretching */
+.img-card img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    border-radius: 0.3em !important;
+}
+
+/* FIRST IMAGE FIX - Add left margin for initial position */
+.img-card:first-child {
+    margin-left: 30px !important;
+}
+
+/* Responsive first image margins */
+@media (max-width: 575.98px) {
+    .img-card:first-child {
+        margin-left: 20px !important;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .img-card:first-child {
+        margin-left: 22px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .img-card:first-child {
+        margin-left: 25px !important;
+    }
+}
