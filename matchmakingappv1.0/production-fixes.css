@@ -28,6 +28,187 @@
     margin-left: 0 !important;
 }
 
+/* ============================================ */
+/* STICKY TIMER CARD */
+/* ============================================ */
+
+.launch-timer-card {
+    position: fixed;
+    right: 20px;
+    top: 30%;
+    transform: translateY(-50%);
+    
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+
+    padding: 20px;
+    border: 1px solid rgba(255,77,109,0.15);
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+
+    z-index: 999;
+    width: 330px;
+
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    animation: popFromTop 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+
+    transition:
+        right 0.4s ease,
+        transform 0.4s ease;
+    overflow: visible;
+}
+
+/* Hidden state */
+.launch-timer-card.collapsed {
+    right: -290px;
+}
+/* Toggle button */
+.timer-toggle {
+    position: absolute;
+    top: 12px;
+    left: -18px;
+
+    width: 36px;
+    height: 36px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #ff4d6d;
+    color: white;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+    transition: all 0.3s ease;
+}
+
+/* When collapsed */
+.launch-timer-card.collapsed .timer-toggle {
+    left: -18px;
+}
+
+/* Hover */
+.timer-toggle:hover {
+    transform: scale(1.08);
+}
+
+.launch-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #ff4d6d;
+}
+
+.timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.time-box {
+    background: linear-gradient(145deg, #fff, #fff0f3);
+    padding: 12px;
+    border-radius: 14px;
+}
+
+.time-box span {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.time-box small {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .launch-timer-card {
+        position: fixed;
+
+        width: calc(100% - 30px);
+        max-width: 330px;
+
+        left: 50% !important;
+        right: auto !important;
+
+        bottom: 20px;
+        top: auto !important;
+
+        transform: translateX(-50%) !important;
+
+        transition:
+            bottom 0.4s ease,
+            transform 0.4s ease;
+
+        box-sizing: border-box;
+    }
+
+    /* Mobile collapsed state */
+    .launch-timer-card.collapsed {
+        bottom: -115px;
+    }
+
+    /* Toggle button moves to top */
+    .timer-toggle {
+        top: -18px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        width: 42px;
+        height: 42px;
+    }
+
+    /* Hover fix for mobile */
+    .timer-toggle:hover {
+        transform: translateX(-50%) scale(1.08);
+    }
+
+    .timer {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+
+    .time-box {
+        padding: clamp(6px, 1.2vw, 12px);
+        border-radius: 10px;
+    }
+
+    .time-box span {
+        font-size: clamp(0.9rem, 1.5vw, 1.8rem);
+    }
+
+}
+
+@keyframes popFromTop {
+    0% {
+        opacity: 0;
+        transform: translateY(calc(-50% - 60px)) scale(0.92);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(calc(-50% + 10px)) scale(1.02);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+    }
+}
+
+
+
 /* Responsive arrow positioning */
 @media (max-width: 575.98px) {
     .carousel::scroll-button(right),

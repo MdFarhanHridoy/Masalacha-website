@@ -101,3 +101,50 @@
         
         // Run once on page load to animate elements already in view
         setTimeout(animateOnScroll, 300);
+
+        // Set your launch date here
+const launchDate = new Date("2026-05-14T00:00:00").getTime();
+
+const timer = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = launchDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+
+    if (distance < 0) {
+        clearInterval(timer);
+        document.querySelector(".timer").innerHTML = "<h3>Launched!</h3>";
+    }
+}, 1000);
+
+const timerCard = document.querySelector(".launch-timer-card");
+const timerToggle = document.getElementById("timerToggle");
+
+function updateToggleIcon() {
+    const isMobile = window.innerWidth <= 768;
+
+    if (timerCard.classList.contains("collapsed")) {
+        timerToggle.innerHTML = isMobile ? "↑" : "←";
+    } else {
+        timerToggle.innerHTML = isMobile ? "↓" : "→";
+    }
+}
+
+/* Initial icon */
+updateToggleIcon();
+
+/* Update when resizing screen */
+window.addEventListener("resize", updateToggleIcon);
+
+timerToggle.addEventListener("click", () => {
+    timerCard.classList.toggle("collapsed");
+    updateToggleIcon();
+});
