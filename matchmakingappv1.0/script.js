@@ -103,7 +103,7 @@
         setTimeout(animateOnScroll, 300);
 
         // Set your launch date here
-const launchDate = new Date("2026-05-14T00:00:00").getTime();
+const launchDate = new Date("2026-05-25T00:00:00").getTime();
 
 const timer = setInterval(() => {
     const now = new Date().getTime();
