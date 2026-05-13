@@ -63,6 +63,13 @@
 .launch-timer-card.collapsed {
     right: -290px;
 }
+
+.launch-timer-card.collapsed .launch-text,
+.launch-timer-card.collapsed .timer {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
 /* Toggle button */
 .timer-toggle {
     position: absolute;
@@ -88,9 +95,11 @@
     transition: all 0.3s ease;
 }
 
-/* When collapsed */
-.launch-timer-card.collapsed .timer-toggle {
-    left: -18px;
+/* When collapsed - DESKTOP ONLY */
+@media (min-width: 769px) {
+    .launch-timer-card.collapsed .timer-toggle {
+        left: -18px;
+    }
 }
 
 /* Hover */
@@ -103,6 +112,7 @@
     font-weight: 600;
     margin-bottom: 16px;
     color: #ff4d6d;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .timer {
@@ -110,6 +120,7 @@
     align-items: center;
     justify-content: center;
     gap: 12px;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .time-box {
@@ -131,7 +142,7 @@
 }
 
 /* Mobile */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .launch-timer-card {
         position: fixed;
 
