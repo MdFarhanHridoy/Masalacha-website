@@ -129,7 +129,7 @@ const timerCard = document.querySelector(".launch-timer-card");
 const timerToggle = document.getElementById("timerToggle");
 
 function updateToggleIcon() {
-    const isMobile = window.innerWidth <= 768;
+    const isMobile = window.innerWidth <= 767;
 
     if (timerCard.classList.contains("collapsed")) {
         timerToggle.innerHTML = isMobile ? "↑" : "←";
