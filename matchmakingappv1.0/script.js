@@ -148,3 +148,61 @@ timerToggle.addEventListener("click", () => {
     timerCard.classList.toggle("collapsed");
     updateToggleIcon();
 });
+
+const cards = document.querySelectorAll(".img-card");
+
+const nextBtn = document.querySelector(".next");
+const prevBtn = document.querySelector(".prev");
+
+let current = 0;
+
+function updateCarousel() {
+
+    cards.forEach((card, index) => {
+
+        card.classList.remove(
+            "active",
+            "left",
+            "right",
+            "hidden"
+        );
+
+        if(index === current){
+            card.classList.add("active");
+        }
+
+        else if(
+            index === (current - 1 + cards.length) % cards.length
+        ){
+            card.classList.add("left");
+        }
+
+        else if(
+            index === (current + 1) % cards.length
+        ){
+            card.classList.add("right");
+        }
+
+        else{
+            card.classList.add("hidden");
+        }
+    });
+}
+
+function nextSlide(){
+    current = (current + 1) % cards.length;
+    updateCarousel();
+}
+
+function prevSlide(){
+    current = (current - 1 + cards.length) % cards.length;
+    updateCarousel();
+}
+
+nextBtn.addEventListener("click", nextSlide);
+prevBtn.addEventListener("click", prevSlide);
+
+updateCarousel();
+
+// AUTO LOOP
+setInterval(nextSlide, 3000);

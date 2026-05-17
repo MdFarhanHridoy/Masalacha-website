@@ -386,85 +386,170 @@ img {
 
 /* ------- CAROUSEL ------- */
 
-        .carousel{
+.carousel{
+            position: relative;
             width: 100%;
-            overflow-x: auto;
-            margin: 3em auto;
+            height: 450px;
+            margin: 4rem auto;
+            overflow: hidden;
+
             display: flex;
-            gap: 1em;
-            scroll-behavior: smooth;
-            anchor-name: --carousel;
-            scroll-snap-type: x mandatory;
-            scroll-marker-group: after;
-            scroll-padding: 0 calc(50% - 10em);
-        }
-
-.carousel::scroll-marker-group{
-    display: flex;
-    justify-content: center;
-    gap: .5em;
-}
-
-.img-card::scroll-marker{
-    content: '';
-    height: 1em;
-    width: 1em;
-    background-color: #F8BD9C;
-    border-radius: 50%;
-}
-
-.img-card::scroll-marker:target-current{
-    background-color: #a07e68;
-    transform: scale(1.3);
-    
-}
-
-.carousel::-webkit-scrollbar{
-    display: none;
-}
-
-.carousel::scroll-button(right),.carousel::scroll-button(left){
-    content: '→';
-    border: none;
-    background-color: #000000;
-    font-family: Consolas;
-    font-size: 2.5rem;
-    color: var(--light-color);
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
-    padding-bottom: .1em;
-    cursor: pointer;
-    position: fixed;
-    position-anchor: --carousel;
-    position-area: right center;
-    margin-right: -1.2rem;
-}
-
-.carousel::scroll-button(left){
-    content: '←';
-    position-area: left center;
-    margin-left: -1.2rem;
-}
-
-.carousel::scroll-button(right):disabled,.carousel::scroll-button(left):disabled{
-    opacity: 0.5;
-    cursor: auto;
+            justify-content: center;
+            align-items: center;
 }
 
 .img-card{
-    flex: 1 1 20em;
-    min-width: 20em;
-    max-width: 30em;
-    min-height: 20em;
-    max-height: 30em;
-    /* aspect-ratio: 5/5; */
-    background-color: #f0f2f5;
-    padding: 1em;
-    border-radius: .5em;
-    text-align: center;
-    align-content: center;
-    scroll-snap-align: center;
+    position: absolute;
+
+    width: 300px;
+    height: 400px;
+
+    object-fit: cover;
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    will-change: transform, opacity;
+
+    transition:
+        transform 0.5s ease,
+        opacity 0.5s ease,
+        filter 0.5s ease;
+
+    opacity: 0.4;
+    transform: scale(0.8);
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* CENTER CARD */
+.img-card.active {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    z-index: 3;
+}
+
+/* LEFT CARD */
+.img-card.left {
+    transform: translateX(-320px) scale(0.85);
+    opacity: 0.5;
+    z-index: 2;
+}
+
+/* RIGHT CARD */
+.img-card.right {
+    transform: translateX(320px) scale(0.85);
+    opacity: 0.5;
+    z-index: 2;
+}
+
+/* HIDDEN CARDS */
+.img-card.hidden {
+    opacity: 0;
+    transform: scale(0.6);
+    z-index: 1;
+}
+
+/* MOBILE - SHOW ONLY ONE CARD */
+
+@media (max-width: 768px) {
+
+    .carousel {
+        height: 340px;
+        padding: 0 50px;
+    }
+
+    .img-card {
+        width: 220px;
+        height: 300px;
+    }
+
+    /* ONLY CENTER CARD SHOWS */
+
+    .img-card.left,
+    .img-card.right,
+    .img-card.hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.7);
+    }
+
+    .img-card.active {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+
+    /* BUTTONS */
+
+    .carousel-btn{
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+    }
+
+    .carousel-btn.prev{
+        left: 10px;
+    }
+
+    .carousel-btn.next{
+        right: 10px;
+    }
+}
+
+/* REAL CAROUSEL BUTTONS */
+
+.carousel-btn{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 60px;
+    height: 60px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(0,0,0,0.8);
+    color: white;
+
+    font-size: 2rem;
+    cursor: pointer;
+
+    z-index: 10;
+
+    transition: 0.3s ease;
+}
+
+.carousel-btn:hover{
+    background: black;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn.prev{
+    left: 20px;
+}
+
+.carousel-btn.next{
+    right: 20px;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px){
+
+    .carousel-btn{
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+    }
+
+    .carousel-btn.prev{
+        left: 5px;
+    }
+
+    .carousel-btn.next{
+        right: 5px;
+    }
 }
 
 /* ------- FOOTER ------- */ 
@@ -726,21 +811,7 @@ footer {
     
     .about-text p {
         font-size: 0.95rem;
-    }
-    
-    .carousel {
-        margin: 2em 0;
-        gap: 0.8em;
-        scroll-padding: 0 2.5%;
-    }
-    
-    .img-card {
-        flex: 0 0 95%;
-        min-width: 95%;
-        max-width: 95%;
-        min-height: 280px;
-        max-height: 280px;
-    }
+    }  
     
     /* Footer */
     footer {
@@ -763,12 +834,6 @@ footer {
     .footer-social a img {
         width: 40px;
         height: 40px;
-    }
-    
-    .carousel::scroll-button(right), .carousel::scroll-button(left) {
-        height: 40px;
-        width: 40px;
-        font-size: 1.5rem;
     }
     
     /* Section */
@@ -896,15 +961,6 @@ footer {
         margin-bottom: 30px;
     }
     
-    .carousel {
-        scroll-padding: 0 27.5%;
-    }
-    
-    .img-card {
-        flex: 0 0 45%;
-        min-width: 45%;
-    }
-    
     /* Footer */
     .footer-logo img {
         width: 90px;
@@ -916,12 +972,6 @@ footer {
 
     footer {
         padding-bottom: 80px;
-    }
-
-    .carousel::scroll-button(right), .carousel::scroll-button(left) {
-        height: 45px;
-        width: 45px;
-        font-size: 2rem;
     }
 }
 
@@ -1365,31 +1415,6 @@ footer {
 /* PRODUCTION FIXES - Consolidated from production-fixes.css */
 /* ============================================ */
 
-/* CAROUSEL ARROW FIXES - Replace experimental CSS with standard positioning */
-.carousel {
-    position: relative !important;
-    scroll-padding: 30px 30px !important;
-}
-
-.carousel::scroll-button(right),
-.carousel::scroll-button(left) {
-    position: absolute !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    z-index: 10 !important;
-}
-
-.carousel::scroll-button(right) {
-    content: '→' !important;
-    right: -30px !important;
-    margin-right: 0 !important;
-}
-
-.carousel::scroll-button(left) {
-    content: '←' !important;
-    left: -30px !important;
-    margin-left: 0 !important;
-}
 
 /* ============================================ */
 /* STICKY TIMER CARD */
@@ -1607,45 +1632,6 @@ footer {
     }
 }
 
-
-
-/* Responsive arrow positioning */
-@media (max-width: 575.98px) {
-    .carousel::scroll-button(right),
-    .carousel::scroll-button(left) {
-        right: -20px !important;
-        left: -20px !important;
-    }
-
-    .carousel {
-        scroll-padding: 20px 20px !important;
-    }
-}
-
-@media (min-width: 576px) and (max-width: 767.98px) {
-    .carousel::scroll-button(right),
-    .carousel::scroll-button(left) {
-        right: -22px !important;
-        left: -22px !important;
-    }
-
-    .carousel {
-        scroll-padding: 22px 22px !important;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 991.98px) {
-    .carousel::scroll-button(right),
-    .carousel::scroll-button(left) {
-        right: -25px !important;
-        left: -25px !important;
-    }
-
-    .carousel {
-        scroll-padding: 25px 25px !important;
-    }
-}
-
 /* HERO IMAGE FIX - Increase size on desktop */
 .hero-image img {
     max-width: 1000px !important;
@@ -1662,29 +1648,3 @@ footer {
     object-position: center !important;
     border-radius: 0.3em !important;
 }
-
-/* FIRST IMAGE FIX - Add left margin for initial position */
-.img-card:first-child {
-    margin-left: 30px !important;
-}
-
-/* Responsive first image margins */
-@media (max-width: 575.98px) {
-    .img-card:first-child {
-        margin-left: 20px !important;
-    }
-}
-
-@media (min-width: 576px) and (max-width: 767.98px) {
-    .img-card:first-child {
-        margin-left: 22px !important;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 991.98px) {
-    .img-card:first-child {
-        margin-left: 25px !important;
-    }
-}
-
-    
