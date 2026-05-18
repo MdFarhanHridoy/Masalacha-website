@@ -144,9 +144,28 @@ updateToggleIcon();
 /* Update when resizing screen */
 window.addEventListener("resize", updateToggleIcon);
 
+let autoHideTimer = setTimeout(() => {
+    timerCard.classList.add("collapsed");
+    updateToggleIcon();
+    autoHideTimer = null;
+}, 5000);
+
 timerToggle.addEventListener("click", () => {
+    if (autoHideTimer) {
+        clearTimeout(autoHideTimer);
+        autoHideTimer = null;
+    }
+
     timerCard.classList.toggle("collapsed");
     updateToggleIcon();
+
+    if (!timerCard.classList.contains("collapsed")) {
+        autoHideTimer = setTimeout(() => {
+            timerCard.classList.add("collapsed");
+            updateToggleIcon();
+            autoHideTimer = null;
+        }, 5000);
+    }
 });
 
 const cards = document.querySelectorAll(".img-card");
